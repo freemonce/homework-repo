@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>변수 사용해보기</title>
+  </head>
+  <body>
+    <script>
+      // 1. 변수 선언
+      const myName = "이승주"; // 고정
+      let myAge = 34; // 변경 가능
+      let myStatus = "공부중";
+
+      // 2. 블록 스코프
+      {
+        let secret = "1234";
+        console.log(secret); // 출력됨
+        console.log(
+          { secret },
+          "이름:",
+          myName,
+          "제 나이는 " + myAge + "살입니다.",
+          "현재는 " + myStatus + "입니다."
+        );
+      }
+      console.log(secret);
+    </script>
+  </body>
+</html>
