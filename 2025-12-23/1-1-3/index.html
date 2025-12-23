@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나만의 프로필 데이터 만들기</title>
+  </head>
+  <body>
+    <script>
+      // 1. 변수 만들기
+      let username = "이승주";
+      let age = 34;
+      let isStudent = "true";
+      let hobby = ["헬스 운동", "유튜브 보기"];
+      let temperature = 5;
+      let emptyVal = null;
+
+      // 2. 타입 확인
+      console.log(typeof username);
+      console.log(typeof age);
+      console.log(typeof isStudent);
+      console.log(typeof hobby);
+      console.log(typeof emptyVal);
+
+      // 3. 삼항 연산자 활용
+      // 나이가 18 이상이면 "성인", 아니면 "학생"
+      let status = age >= 18 ? "성인" : "학생";
+      console.log("제 신분은 " + status + "입니다.");
+
+      // 날씨 온도가 10도 이하이면 "춥다", 아니면 "덥다"
+      let degree = temperature <= 10 ? "춥다" : "덥다";
+      console.log(
+        "날씨 온도가 10도 아래이면" + degree + " 그러므로 감기 조심하자."
+      );
+    </script>
+  </body>
+</html>
