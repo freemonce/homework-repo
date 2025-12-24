@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>간단한 계산기 함수 만들기</title>
+  </head>
+  <body>
+    <h1>간단한 계산기 함수 만들기</h1>
+
+    <script>
+      function calculate(a, b, op = "+") {
+        // 1. 숫자가 아닌 값이 들어왔는지 검사
+        if (isNaN(a) || isNaN(b)) return "숫자를 입력해주세요.";
+
+        switch (op) {
+          case "+":
+            return a + b;
+          case "-":
+            return a - b;
+          case "*":
+            return a * b;
+          case "/":
+            // 2. 중요: 계산(a / b)을 하기 전에 반드시 0인지 먼저 검사해야 합니다.
+            if (b === 0) {
+              return "0으로 나눌 수 없습니다";
+            }
+            return a / b;
+          default:
+            return "잘못된 연산자";
+        }
+      }
+
+      // 2. 사용자 입력 받기 (순서 조정)
+      const num1 = Number(prompt("첫 번째 숫자를 입력하세요."));
+      const operator = prompt("연산자를 입력하세요 (+, -, *, /)");
+      const num2 = Number(prompt("두 번째 숫자를 입력하세요."));
+
+      // 3. 결과 출력
+      const result = calculate(num1, num2, operator);
+      console.log(`결과: ${result}`);
+    </script>
+  </body>
+</html>

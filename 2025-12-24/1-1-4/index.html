@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>구구단 출력 만들기</title>
+  </head>
+  <body>
+    <h1>구구단 출력 만들기</h1>
+
+    <script>
+      const input = prompt("숫자를 입력하세요.");
+      const num = Number(input);
+
+      if (num >= 2 && num <= 9) {
+        // 1. 조건이 맞을 때만 이 안의 코드가 실행됩니다.
+        console.log(`${num}단을 출력합니다.`);
+
+        for (let i = 1; i <= 9; i++) {
+          console.log(`${num} * ${i} = ${num * i}`);
+        }
+      } else {
+        // 2. 조건이 맞지 않으면 이 블록만 실행되고 끝납니다.
+        console.log("2~9 사이 숫자를 입력하세요.");
+      }
+    </script>
+  </body>
+</html>
