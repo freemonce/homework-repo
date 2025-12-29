@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니 배열 관리하기</title>
+  </head>
+  <body>
+    <h1>장바구니 배열 관리하기</h1>
+
+    <script>
+      //   1. cart 배열
+      const cart = [
+        { name: "아이스크림", price: 1000 },
+        { name: "고구마 1상자", price: 5000 },
+        { name: "떡 1묶음(10개)", price: 2000 },
+      ];
+
+      //   cart 배열에 상품추가하기 (push)
+      cart.push(
+        { name: "냉동만두", price: 3000 },
+        { name: "냉동돈까스", price: 4000 }
+      );
+
+      console.log(cart);
+
+      //   2. 특정 상품 삭제하기 (splice + indexOf)
+      const idx = cart.findIndex((item) => item.name === "고구마 1상자");
+      if (idx != -1) cart.splice(idx, 1);
+      console.log(cart);
+
+      // 3. 상품 목록 출력하기 (join)
+      console.log(cart.map((item) => item.name).join(" / "));
+
+      // 4. 가격순 정렬하기 (sort + 비교 함수)
+      cart.sort((a, b) => a.price - b.price);
+      console.log(cart.map((i) => i.name).join(", "));
+    </script>
+  </body>
+</html>
