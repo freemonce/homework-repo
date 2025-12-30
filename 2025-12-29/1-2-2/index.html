@@ -10,24 +10,21 @@
 
     <script>
       //   1. cart 배열
-      const cart = [
-        { name: "아이스크림", price: 1000 },
-        { name: "고구마 1상자", price: 5000 },
-        { name: "떡 1묶음(10개)", price: 2000 },
-      ];
+      const cart = [];
 
       //   cart 배열에 상품추가하기 (push)
-      cart.push(
-        { name: "냉동만두", price: 3000 },
-        { name: "냉동돈까스", price: 4000 }
-      );
+      cart.push({ name: "냉동만두", price: 3000 });
+      cart.push({ name: "냉동돈까스", price: 4000 });
+      cart.push({ name: "아이스크림", price: 1000 });
+      cart.push({ name: "고구마 1상자", price: 5000 });
+      cart.push({ name: "떡 1묶음(10개)", price: 2000 });
 
-      console.log(cart);
+      console.log([...cart]);
 
       //   2. 특정 상품 삭제하기 (splice + indexOf)
       const idx = cart.findIndex((item) => item.name === "고구마 1상자");
       if (idx != -1) cart.splice(idx, 1);
-      console.log(cart);
+      console.log([...cart]);
 
       // 3. 상품 목록 출력하기 (join)
       console.log(cart.map((item) => item.name).join(" / "));
