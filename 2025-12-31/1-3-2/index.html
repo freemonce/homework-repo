@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>간단한 프로필 카드 조작하기</title>
+  </head>
+  <style>
+    /* 다크모드 스타일 정의 */
+    .dark-mode {
+      background-color: #333;
+      color: white;
+    }
+  </style>
+  <body>
+    <h1>간단한 프로필 카드 조작하기</h1>
+    <div class="profile-name"></div>
+    <button class="profile-card">1234</button>
+    <div id="user" data-user-id="111"></div>
+
+    <script>
+      // 1. querySelector 로 '.profile-name' 요소를 선택하고 textContext 를  "홍길동"으로 변경
+      const profile = document.querySelector(".profile-name");
+      profile.textContent = "홍길동";
+
+      // 2. classList.toggle 로 '.profile-card'에 'dark-mode' 클래스 토글 기능 구현
+      const card = document.querySelector(".profile-card");
+
+      card.addEventListener("click", function () {
+        // 버튼을 누를 때마다 'dark-mode' 클래스가 들어갔다 빠졌다 합니다.
+        this.classList.toggle("dark-mode");
+        console.log("현재 클래스 목록:", this.classList);
+      });
+
+      // 3. dataset 으로 'data-user-id' 값을 읽어 콘솔에 출력
+      const user = document.querySelector("#user");
+      console.log("유저 아이디:", user.dataset.userId);
+
+      // 4. createElement 와 appendChild 로 새 태그 요소 추가
+      const newLi = document.createElement("li");
+      newLi.textContent = "새로운 목록 아이템";
+      document.body.appendChild(newLi);
+    </script>
+  </body>
+</html>
