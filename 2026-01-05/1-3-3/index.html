@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>버튼 그룹 효율적으로 관리하기</title>
+  </head>
+  <body>
+    <h1>버튼 그룹 효율적으로 관리하기</h1>
+    <div class="button-group">
+      <button data-action="add">추가</button>
+      <button data-action="edit">수정</button>
+      <button data-action="delete">삭제</button>
+    </div>
+
+    <script>
+      "use strict";
+
+      //   - 부모 컨테이너 요소를 선택
+      const buttonGroup = document.querySelector(".button-group");
+
+      // 1. 부모 `div.button-group`에 단 하나의 리스너 등록
+      // 2. 클릭된 요소가 `button`인지 확인 (또는 `closest`)
+      buttonGroup.addEventListener("click", function (event) {
+        // - [찾기] 클릭된 지점에서 가장 가까운 버튼을 찾습니다.
+        const btn = event.target.closest("button");
+
+        // - [검사] 버튼이 존재하고, 그 버튼이 이 그룹(buttonGroup) 안에 있는지 확인합니다.
+        if (!btn || !buttonGroup.contains(btn)) {
+          // 4. 버튼 외 영역 클릭 무시
+          return;
+        }
+
+        // 3. `data-action` 값에 따라 분기 처리
+        const action = btn.dataset.action;
+
+        if (action === "add") {
+          console.log("추가 버튼 : Add Clicked");
+          // 추가 로직
+        } else if (action === "edit") {
+          console.log("수정 버튼: Edit Clicked");
+          // 삭제 로직
+        } else if (action === "delete") {
+          console.log("삭제 버튼: Delete Clicked");
+        }
+      });
+
+      //   예상 결과
+      //  각 버튼 클릭 시 콘솔 출력:  "Add Clicked"   "Edit Clicked"  * 버튼 사이 여백 클릭 시 반응 없음
+    </script>
+  </body>
+</html>
