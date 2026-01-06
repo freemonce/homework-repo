@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>레거시 코드 청산하기</title>
+  </head>
+  <body>
+    <h1>레거시 코드 청산하기</h1>
+    <script>
+      "use strict";
+
+      //   var defaultSettings = {
+      //     theme: "blue",
+      //     showSidebar: true,
+      //   };
+
+      //   // 1. 설정 병합 함수
+      //   var updateSettings = function (userSettings) {
+      //     // 수동 병합 (복잡함)
+      //     var final = {};
+      //     final.theme = userSettings.theme || defaultSettings.theme;
+      //     final.showSidebar =
+      //       userSettings.showSidebar || defaultSettings.showSidebar;
+
+      //     // 2. 결과 출력
+      //     console.log("테마: " + final.theme);
+      //     return final;
+      //   };
+
+      //   const defaultSettings = {
+      //     theme: "blue",
+      //     showSidebar: true,
+      //   };
+
+      //   1. 'function' 키워드를 삭제하고 화살표 함수로 바꾸세요.
+      //  2. 지저분한 **수동 병합 로직('||')**을 지우고, 스프레드 문법 (...) 단 한 줄로 두 객체를 합치세요.
+      const updateSettings = (userSettings) => ({
+        ...defaultSettings,
+        ...userSettings,
+      });
+
+      // 테스트 실행 및 3번 로직 수행
+      const userConfig = { theme: "dark" }; // 테스트용 입력값
+      const final = updateSettings(userConfig);
+
+      //  3. 결과 객체에서 'theme'을 구조분해 할당으로 꺼낸 뒤, 백틱(`)을 써서 출력하세요.
+      const { theme } = final;
+      console.log(`테마: ${theme}`);
+
+      // 요구사항 (Step-by-Step)
+      //   1. 'function' 키워드를 삭제하고 화살표 함수로 바꾸세요.
+      //  2. 지저분한 **수동 병합 로직('||')**을 지우고, 스프레드 문법 (...) 단 한 줄로 두 객체를 합치세요.
+      //  3. 결과 객체에서 'theme'을 구조분해 할당으로 꺼낸 뒤, 백틱(`)을 써서 출력하세요.
+
+      // 예상 결과
+      //  콘솔 출력:
+      //  테마 : dark
+
+      // 리팩토링 포인트:
+      //  'Object.assign' 이나 반복문 없이 병합했는가?
+      // 반환문(return)을 생략했는가? (선택)
+    </script>
+  </body>
+</html>

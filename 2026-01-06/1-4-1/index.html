@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>사용자 정보 안전하게 출력하기</title>
+  </head>
+  <body>
+    <h1>사용자 정보 안전하게 출력하기</h1>
+
+    <script>
+      const users = [
+        {
+          name: "Kim",
+          profile: { bio: "Hi" },
+        },
+        {
+          name: "Lee",
+          profile: null, //정보 없음
+        },
+      ];
+
+      // 1. 'users' 배열을 for..of로 순회
+      for (const user of users) {
+        // console.log(user);
+
+        // 2.'profile' 이 없으면 'bio'를 "소개 없음"으로 처리 ('?.' 와 '??' 사용)
+        const userBio = user.profile?.bio ?? "소개없음";
+        // console.log(userBio);
+
+        // 3. 탬플릿 리터럴로 <div> 태그 생성
+        const divString = `<div "${user.name}: ${userBio}"></div>`;
+
+        console.log(divString);
+      }
+      // 요구 사항
+      // 1. 'users' 배열을 for..of로 순회
+      // 2.'profile' 이 없으면 'bio'를 "소개 없음"으로 처리 ('?.' 와 '??' 사용)
+
+      // 예상 결과
+      // 콘솔 출력 :
+      // <div>Kim: Hi</div>
+      // <div>Lee : 소개 없음</div>
+
+      // 체크 포인트:
+      // 에러 없이 실행되는가?
+      // null 값이 안전하게 처리되었는가?
+    </script>
+  </body>
+</html>
