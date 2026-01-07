@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this 바인딩 실험하기</title>
+  </head>
+  <body>
+    <h1>this 바인딩 실험하기</h1>
+
+    <script>
+      const hero = {
+        name: "Batman",
+        call() {
+          console.log(this.name);
+        },
+      };
+
+      // 1. this 손실 (undefined)
+      // 'stolenCall' 실행 시 'undefined'가 나오는 이유 주석 달기
+      const stolenCall = hero.call;
+      //  함수를 변수에 담는 순간, hero 객체와의 연결고리가 끊깁니다.
+      //  이제 그냥 일반 함수로서 호출되기 때문에 'this'는 전역 객체(window)를 가리킵니다.
+      stolenCall();
+
+      // 2. bind로 해결하기
+      const fixedCall = hero.call.bind(hero);
+      fixedCall();
+
+      // 3. 'setTimeout' 안에서 'this' 잃어버리는 예제 하나 더 만들기
+      const darkKnight = {
+        name: "Batman",
+        shout() {
+          setTimeout(function () {
+            console.log("Who is it?: " + this.name);
+          }, 1000);
+        },
+      };
+
+      darkKnight.shout();
+
+      // 요구 사항
+      // 1. 'stolenCall' 실행 시 'undefined'가 나오는 이유 주석 달기
+      // 2. 'fixedCall' 변수에 bind를 사용해서 해결책 작성하기
+      // 3. 'setTimeout' 안에서 'this' 잃어버리는 예제 하나 더 만들기
+
+      // 예상 결과
+      // 콘솔 출력 : Batman
+      // Check Point:
+      // bind 를 사용했나요?
+      // call/apply 가 아닌 bind인가요?
+    </script>
+  </body>
+</html>

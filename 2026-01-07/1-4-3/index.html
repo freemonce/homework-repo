@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>클로저로 카운터 모듈 만들기</title>
+  </head>
+  <body>
+    <h1>클로저로 카운터 모듈 만들기</h1>
+    <script>
+      function createCounter() {
+        let count = 0; // 2. 내부 'count' 변수는 외부에서 직접 접근 불가 (private)
+
+        // 1. 'createCounter()' 함수가 'increment', 'decrement', 'getValue'를 반환
+        return {
+          increment() {
+            count++;
+            return count;
+          },
+          decrement() {
+            count--;
+            return count;
+          },
+          getValue() {
+            return count;
+          },
+
+          // 4. 선택 : 'reset()' 메서드 추가
+          reset() {
+            count = 0;
+            return count;
+          },
+        };
+      }
+
+      // 3. 각 counter 인스턴스가 독립적인 상태를 유지
+      const counter1 = createCounter();
+      const counter2 = createCounter();
+
+      console.log("C1 증가:", counter1.increment());
+      console.log("C1 증가:", counter1.increment());
+      console.log("C2 증가:", counter2.increment());
+
+      console.log("C1 리셋:", counter1.reset());
+      console.log("C2 값 유지:", counter2.getValue());
+
+      //  목표  -- 은행 계좌 예제 참고
+      // 클로저를 활용하여 private 상태를 가진 카운터 모듈을 구현합니다.
+
+      // 요구사항
+      // 1. 'createCounter()' 함수가 'increment', 'decrement', 'getValue'를 반환
+      // 2. 내부 'count' 변수는 외부에서 직접 접근 불가 (private)
+      // 3. 각 counter 인스턴스가 독립적인 상태를 유지
+      // 4. 선택 : 'reset()' 메서드 추가
+
+      // 예상 결과
+      // counter1.increment() -> 1
+      // counter2.increment() -> 2
+      // (서로 독립적으로 동작해야 함)
+    </script>
+  </body>
+</html>
