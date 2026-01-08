@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>쇼핑몰 데이터 파이프라인</title>
+  </head>
+  <body>
+    <h1>쇼핑몰 데이터 파이프라인</h1>
+
+    <script>
+      const products = [
+        { name: "Mouse", price: 50000, stock: 10 },
+        { name: "Key", price: 15000, stock: 0 },
+        { name: "Monitor", price: 400000, stock: 5 },
+        { name: "Speaker", price: 80000, stock: 0 },
+      ];
+
+      // 목표
+      // 지저분한 상품 데이터를 filter -> map -> sort 파이프라인을 통해 깔끔하게 정제해보세요.
+
+      // 한 번에 연결(chaining)하여 정제하기
+      const result = products
+        .filter((p) => p.stock > 0) // 1. 재고 있는 것만
+        .map((p) => ({
+          ...p,
+          salePrice: p.price * 0.9, // 2. 할인가 추가(salePrice 명명)
+        }))
+        .sort((a, b) => a.salePrice - b.salePrice); // 3. 할인가 오름차순 정렬
+
+      console.log("절제된 데이터: ", result);
+      console.log("원본 유지 확인: ", products);
+
+      //   요구사항
+      //  1. 'filter': 재고(stock > 0)가 있는 상품만 추출하세요.
+      // 2. 'map': 10% 할인가를 적용한 'salePrice' 속성을 추가하세요. (스프레드 '...p' 활용)
+      // 3. 'sort': 'salePrice' 기준으로 오름차순 정렬하세요.
+
+      // 예상 결과
+      // 콘솔 출력:
+      //    [
+      //   { name: "Mouse", price: 50000, stock: 10, salePrice: 45000},
+      //   {name: "Monitor", price: 400000, stock: 5, salePrice: 360000}
+      // ]
+
+      // Check Point:
+      // 원본 products는 그대로인가요?
+      // 체이닝으로 한 번에 연결했나요?
+    </script>
+  </body>
+</html>
