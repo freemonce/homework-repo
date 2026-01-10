@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>피자 배달 시뮬레이션</title>
+  </head>
+  <body>
+    <h1>피자 배달 시뮬레이션</h1>
+
+    <script>
+      // 목표 : 중첩된 콜백으로 작성된 피자주문 시스템을 async/await을 사용하여 리팩토링 하세요.
+
+      // 미션 (index.html에 작성)
+      // 1.  async function deliverPizza() 만들기
+      // 2. 각 단계를 await로 순차 실행
+      // 3. try-catch로 에러 처리 통합
+      // 4. 성공 시 "배달 완료!" 콘솔 출력
+
+      //   orderPizza("Pepperoni", (err, orderId) => {
+      //     if (err) return handleError(err);
+
+      //     makeDough(orderId, (err, dough) => {
+      //       if (err) return handleError(err);
+
+      //       bakePizza(dough, (err, pizza) => {
+      //         if (err) return handleError(err);
+      //         console.log(`${pizza.name} 배달 완료! 🍕`);
+      //       });
+      //     });
+      //   });
+
+      // 1. 기존 콜백 함수들을 Promise 방식으로 정의합니다.
+      const orderPizza = (type) => {
+        return new Promise((resolve, reject) => {
+          console.log(`${type} 주문 접수 중...`);
+          setTimeout(() => resolve("ORD-123"), 1000); // 1초 후 주문번호 반환
+        });
+      };
+
+      const makeDough = (orderId) => {
+        return new Promise((resolve) => {
+          console.log(`주문번호 ${orderId}: 도우 만드는 중...`);
+          setTimeout(() => resolve("숙성된 도우"), 1000);
+        });
+      };
+
+      const bakePizza = (dough) => {
+        return new Promise((resolve) => {
+          console.log(`${dough}로 피자 굽는 중...`);
+          setTimeout(() => resolve({ name: "Pepperoni Pizza" }), 1000);
+        });
+      };
+
+      // 2. 작성하신 리팩토링 코드를 실행합니다.
+      async function deliverPizza() {
+        try {
+          console.log("주문을 시작합니다.");
+
+          // 1. 주문하기 (인자 전달)
+          const orderId = await orderPizza("Pepperoni");
+
+          // 2. 도우 만들기
+          const dough = await makeDough(orderId);
+
+          // 3. 굽기
+          const pizza = await bakePizza(dough);
+
+          //   4. 성공 메시지 출력
+          console.log(`${pizza.name} 배달 완료!`);
+        } catch (error) {
+          // 모든 단계 중 하나라도 실패하면 이쪽으로 점프
+          console.error("피자 배달 중 에러 발생", error);
+        }
+      }
+
+      deliverPizza();
+    </script>
+  </body>
+</html>
