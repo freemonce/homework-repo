@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>안전한 피자 키오스크</title>
+  </head>
+  <body>
+    <h1>안전한 피자 키오스크</h1>
+    <script>
+      // Misson 1. 안전 장치 설치
+      // 1. 피자 주문 함수 (가끔 실패함)
+      function orderPizza(menu) {
+        console.log(menu + " 주문 접수 중...");
+
+        // TODO: 랜덤하게 에러 발생시키기 (재료 소진)
+        if (Math.random() < 0.3) {
+          // 여기에 코드를 작성하세요 (throw)
+          throw new Error("재료 소진되어 주문취소 되었습니다.");
+        }
+
+        return menu + " 준비 완료!";
+      }
+
+      // 2. 키오스크 메인 로직
+      function kiosk() {
+        console.log("=== 키오스크 가동 ===");
+
+        // TODO: 안전하게 주문 받기 (try-catch)
+
+        // 성공: "맛있게 드세요!"
+        // 실패: "죄송합니다..."
+        try {
+          const result = orderPizza("페퍼로니");
+          console.log(result);
+          console.log("맛있게 드세요!");
+        } catch {
+          console.error("죄송합니다... 주문이 취소되었습니다.");
+        }
+      }
+
+      kiosk();
+
+      // Misson 2. 비동기 주문
+      // 1. orderPizza 를 **Promise**를 반환하도록 수정하세요 (setTimeout 사용)
+      function orderPizza(menu) {
+        console.log(menu + " 주문 접수 중... (2초 소요 예정) ");
+
+        return new Promise((resolve, reject) => {
+          // 실제 요리 시간을 시뮬레이션하기
+          setTimeout(() => {
+            const isError = Math.random() < 0.3;
+
+            if (isError) {
+              // 실패 시 reject 호출
+              reject(new Error("재료 소진"));
+            } else {
+              // 성공 시 resolve 호출
+              resolve(menu + " 준비 완료!");
+            }
+          }, 2000);
+        });
+      }
+
+      // 2. async/await 를 사용하여 비동기 에러도 잘 잡히는지 확인하세요.
+      async function kiosk() {
+        console.log("=== 키오스크 가동 ===");
+
+        try {
+          const result = await orderPizza("페퍼로니");
+
+          console.log(result);
+          console.log("맛있게 드세요!");
+        } catch (error) {
+          console.error("죄송합니다, 재료가 소진되었습니다.");
+        } finally {
+          console.log(" === 이용해주셔서 감사합니다 ===");
+          //  3. 주문성공/실패와 상관없이 **"이용해주셔서 감사합니다"** 를 출력하세요 (finally).
+        }
+      }
+    </script>
+  </body>
+</html>

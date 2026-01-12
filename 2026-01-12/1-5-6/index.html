@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localStorage로 할 일 목록 관리하기</title>
+  </head>
+  <body>
+    <h1>localStorage로 할 일 목록 관리하기</h1>
+    <div class="container">
+      <input type="text" id="todo-input" placeholder="할 일 입력" />
+      <button id="add-btn">추가</button>
+
+      <ul id="todo-list"></ul>
+    </div>
+
+    <script>
+      // 1. 초기 데이터 불러오기
+      const saved = localStorage.getItem("todos");
+      let todos = saved ? JSON.parse(saved) : [];
+
+      const input = document.querySelector("#todo-input");
+      const addBtn = document.querySelector("#add-btn");
+      const list = document.querySelector("#todo-list");
+
+      // 2. 데이터 저장 함수
+      function saveData() {
+        localStorage.setItem("todos", JSON.stringify(todos));
+      }
+
+      // 3. 화면 그리기 (렌더링) 함수
+      function render() {
+        list.innerHTML = ""; // 이전 목록 싹 비우기
+
+        todos.forEach((todo, index) => {
+          // (1) li 태그 만들기
+          const li = document.createElement("li");
+          li.textContent = todo;
+
+          // (2) 개별 삭제 버튼 만들기
+          const delBtn = document.createElement("button");
+          delBtn.textContent = "삭제";
+          delBtn.style.marginLeft = "10px";
+
+          // (3) 삭제 버튼에 클릭 이벤트 바로 연결 (여기가 핵심!)
+          delBtn.addEventListener("click", () => {
+            todos.splice(index, 1); // 배열에서 해당 순서 데이터 삭제
+            saveData(); // 로컬스토리지 업데이트
+            render(); // 화면 다시 그리기
+          });
+
+          // (4) li에 삭제 버튼을 자식으로 넣기
+          li.appendChild(delBtn);
+          // (5) ul(list)에 완성된 li를 자식으로 넣기
+          list.appendChild(li);
+        });
+      }
+
+      // 4. 추가 기능 구현
+      addBtn.addEventListener("click", () => {
+        const text = input.value.trim();
+        if (text === "") return;
+
+        todos.push(text);
+        saveData();
+        render();
+        input.value = "";
+        input.focus(); // 입력 후 자동으로 커서 가져다 놓기
+      });
+
+      // 5. 엔터 키로도 추가 가능하게 만들기
+      input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") addBtn.click();
+      });
+
+      // 6. 페이지 로드 시 최초 실행
+      render();
+    </script>
+  </body>
+</html>
