@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문자열 조작 함수 만들기</title>
+  </head>
+  <body>
+    <script>
+      // 요구 사항
+      // 1. 문자열 뒤집기 : reverse(str)
+      const str = "Hello World";
+
+      function reverse(str) {
+        return str.split("").reverse().join("");
+      }
+
+      // 2. 숫자 3자리 패딩 : padThree(num)
+      const numList = [1, 2, 3, 4, 5];
+
+      function padThree(num) {
+        return String(num).padStart(3, "0");
+      }
+
+      // 3. 특정 문자 삭제 : removeAll(str, char)
+      const fruits = ["apple", "banana", "orange"];
+
+      function removeAll(str, char) {
+        return str.replaceAll(char, "");
+      }
+
+      const result = fruits.map((f) => removeAll(f, "a"));
+
+      // 4. 함수 결과 출력 확인
+      console.log(reverse(str));
+      console.log(padThree(5));
+      console.log(result);
+    </script>
+  </body>
+</html>
