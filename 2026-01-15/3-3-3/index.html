@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fetch로 공개 API 호출하기</title>
+  </head>
+  <body>
+    <h1>fetch로 공개 API 호출하기</h1>
+
+    <script>
+      // 1. JSONPlaceholder API에서 게시글 목록을 가져오세요
+      const url = "https://jsonplaceholder.typicode.com/posts/6";
+
+      // 2. async/await 문법을 사용하여 데이터를 받아오세요
+      async function getPosts() {
+        // 4. try-catch로 에러 처리를 추가하세요
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+
+          // 3. 받아온 데이터를 console.log로 확인하세요
+          console.log(data);
+
+          return data;
+        } catch (error) {
+          console.error("데이터를 가져오는 중 오류 발생:", error);
+        }
+      }
+
+      getPosts();
+    </script>
+  </body>
+</html>
