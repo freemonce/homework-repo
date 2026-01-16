@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>간단한 구현 문제 풀어보기</title>
+  </head>
+  <body>
+    <script>
+      // 1. 정수 n을 입력받아 1부터 n까지 합계를 반환하는 함수 작성
+      function sum(n) {
+        let total = 0;
+        for (let i = 1; i <= n; i++) {
+          total += i;
+        }
+        return total;
+      }
+
+      const answer = sum(15);
+      console.log(answer);
+
+      // 2. 짝수만 더하는 함수와 홀수만 더하는 함수도 추가 구현
+      function sumEven(n) {
+        let total = 0;
+        for (let i = 2; i <= n; i += 2) {
+          total += i;
+        }
+        return total;
+      }
+
+      const answer1 = sumEven(15);
+      console.log(answer1);
+
+      function sumOdd(n) {
+        let total = 0;
+        for (let i = 1; i <= n; i += 2) {
+          total += i;
+        }
+        return total;
+      }
+
+      const answer2 = sumOdd(15);
+      console.log(answer2);
+    </script>
+  </body>
+</html>

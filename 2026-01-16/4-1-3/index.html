@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상태 코드별 응답 시뮬레이션하기</title>
+  </head>
+  <body>
+    <button onclick="testStatus(200)">200 테스트</button>
+    <button onclick="testStatus(404)">404 테스트</button>
+    <button onclick="testStatus(500)">500 테스트</button>
+
+    <script>
+      async function testStatus(code) {
+        try {
+          const response = await fetch(`https://httpstat.us/${code}`, {
+            headers: { Accept: "application/json" },
+          });
+
+          console.log(`요청한 코드: ${code} -> 실제 상태: ${response.status}`);
+
+          if (!response.ok) {
+            throw new Error(`에러 발생! 상태코드: ${response.status}`);
+          }
+
+          console.log("요청 성공!");
+        } catch (error) {
+          console.error("결과:", error.message);
+        }
+      }
+    </script>
+  </body>
+</html>
